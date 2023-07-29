@@ -18,8 +18,4 @@ public interface QuestionService {
     Collection<Question> getAll();
 
     Question getRandomQuestion();
-
-    Map<String, String> getQuestionMap();
-
-    Set<Question> getQuestionSet();
 }

@@ -1,6 +1,7 @@
 package course_2.course_work_2.services;
 
 import course_2.course_work_2.data.Question;
+import course_2.course_work_2.data.QuestionRepository;
 import course_2.course_work_2.exceptions.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
     @MockBean
-    QuestionService questionService = new JavaQuestionService();
+    QuestionRepository questionRepository = new QuestionRepository();
+    @MockBean
+    QuestionService questionService = new JavaQuestionService(questionRepository);
     @Autowired
     ExaminerService examinerService = new ExaminerServiceImpl(questionService);
 

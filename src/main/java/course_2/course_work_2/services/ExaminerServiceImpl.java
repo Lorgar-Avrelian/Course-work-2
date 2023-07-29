@@ -16,7 +16,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        if (questionService.getQuestionSet().size() < amount) {
+        if (questionService.getAll().size() < amount) {
             throw new BadRequestException("Запрошено количество вопросов большее, чем хранится в сервисе!");
         }
         Set<Question> examSet = new HashSet<>();
