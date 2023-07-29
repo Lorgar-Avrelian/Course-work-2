@@ -1,7 +1,8 @@
 package course_2.course_work_2.services;
 
+import course_2.course_work_2.data.MathQuestionRepositoryImpl;
 import course_2.course_work_2.data.Question;
-import course_2.course_work_2.data.QuestionRepository;
+import course_2.course_work_2.data.JavaQuestionRepositoryImpl;
 import course_2.course_work_2.exceptions.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,17 +16,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
-    private final QuestionRepository questionRepository = new QuestionRepository();
-    private final QuestionService questionService = new JavaQuestionService(questionRepository);
-    private final ExaminerServiceImpl examinerService = new ExaminerServiceImpl(questionService);
+    private final JavaQuestionRepositoryImpl javaQuestionRepository = new JavaQuestionRepositoryImpl();
+    private final MathQuestionRepositoryImpl mathQuestionRepository = new MathQuestionRepositoryImpl();
+    private final QuestionService javaQuestionService = new JavaQuestionService(javaQuestionRepository);
+    private final QuestionService mathQuestionService = new MathQuestionService(mathQuestionRepository);
+    private final ExaminerServiceImpl examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
 
     @Test
     void getQuestions() {
-        questionService.add(TEST_QUESTION_1);
-        questionService.add(TEST_QUESTION_2);
-        questionService.add(TEST_QUESTION_3);
-        questionService.add(TEST_QUESTION_4);
-        questionService.add(TEST_QUESTION_5);
+        javaQuestionService.add(TEST_QUESTION_1);
+        javaQuestionService.add(TEST_QUESTION_2);
+        mathQuestionService.add(TEST_QUESTION_3);
+        mathQuestionService.add(TEST_QUESTION_4);
+        mathQuestionService.add(TEST_QUESTION_5);
         assertThrows(BadRequestException.class, () -> examinerService.getQuestions(6));
         Collection<Question> actualSet = examinerService.getQuestions(5);
         assertEquals(TEST_QUESTION_SET, actualSet);

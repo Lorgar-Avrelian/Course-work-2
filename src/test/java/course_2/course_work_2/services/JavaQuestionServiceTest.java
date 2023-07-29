@@ -1,7 +1,7 @@
 package course_2.course_work_2.services;
 
 import course_2.course_work_2.data.Question;
-import course_2.course_work_2.data.QuestionRepository;
+import course_2.course_work_2.data.JavaQuestionRepositoryImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import static course_2.course_work_2.constants.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JavaQuestionServiceTest {
-    private final QuestionRepository questionRepository = new QuestionRepository();
+    private final JavaQuestionRepositoryImpl questionRepository = new JavaQuestionRepositoryImpl();
     private final QuestionService questionService = new JavaQuestionService(questionRepository);
 
     @Test
