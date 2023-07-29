@@ -5,28 +5,19 @@ import course_2.course_work_2.data.QuestionRepository;
 import course_2.course_work_2.exceptions.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collection;
 
 import static course_2.course_work_2.constants.Constants.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ExaminerServiceImpl.class)
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
-    @MockBean
-    QuestionRepository questionRepository = new QuestionRepository();
-    @MockBean
-    QuestionService questionService = new JavaQuestionService(questionRepository);
-    @Autowired
-    ExaminerService examinerService = new ExaminerServiceImpl(questionService);
+    private final QuestionRepository questionRepository = new QuestionRepository();
+    private final QuestionService questionService = new JavaQuestionService(questionRepository);
+    private final ExaminerServiceImpl examinerService = new ExaminerServiceImpl(questionService);
 
     @Test
     void getQuestions() {
