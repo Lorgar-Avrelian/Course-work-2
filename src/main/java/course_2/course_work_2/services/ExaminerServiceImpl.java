@@ -31,9 +31,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         }
         Set<Question> examSet = new HashSet<>();
         int javaQuestionAmount = (int) (Math.random() * amount);
-        System.out.println(javaQuestionAmount);
         int mathQuestionAmount = amount - javaQuestionAmount;
-        System.out.println(mathQuestionAmount);
         if (javaQuestionAmount > javaQuestionCount) {
             javaQuestionAmount = javaQuestionCount;
             mathQuestionAmount = amount - javaQuestionAmount;
@@ -41,8 +39,6 @@ public class ExaminerServiceImpl implements ExaminerService {
             mathQuestionAmount = mathQuestionCount;
             javaQuestionAmount = amount - mathQuestionAmount;
         }
-        System.out.println(javaQuestionAmount);
-        System.out.println(mathQuestionAmount);
         examSet.addAll(getExamJavaQuestions(javaQuestionAmount));
         examSet.addAll(getExamMathQuestions(mathQuestionAmount));
         return examSet;
