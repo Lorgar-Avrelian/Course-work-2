@@ -43,4 +43,14 @@ public class JavaQuestionService implements QuestionService {
         List<Question> questionList = new ArrayList<>(questionSet);
         return questionList.get(random.nextInt(0, questionList.size()));
     }
+
+    @Override
+    public Map<String, String> getQuestionMap() {
+        return questionMap;
+    }
+
+    @Override
+    public Set<Question> getQuestionSet() {
+        return questionSet;
+    }
 }
