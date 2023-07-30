@@ -51,6 +51,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         }
         return javaExamSet;
     }
+
     private Collection<Question> getExamMathQuestions(int amount) {
         Set<Question> mathExamSet = new HashSet<>();
         while (mathExamSet.size() < amount) {
