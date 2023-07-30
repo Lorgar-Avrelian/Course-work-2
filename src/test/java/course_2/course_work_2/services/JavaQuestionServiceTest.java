@@ -1,21 +1,32 @@
 package course_2.course_work_2.services;
 
-import course_2.course_work_2.data.JavaQuestionRepositoryImpl;
 import course_2.course_work_2.data.Question;
+import course_2.course_work_2.data.QuestionRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static course_2.course_work_2.constants.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class JavaQuestionServiceTest {
-    private final JavaQuestionRepositoryImpl questionRepository = new JavaQuestionRepositoryImpl();
-    private final QuestionService questionService = new JavaQuestionService(questionRepository);
+    @Mock
+    @Qualifier("javaQuestionRepositoryImpl")
+    QuestionRepository questionRepository;
+    @InjectMocks
+    JavaQuestionService questionService;
 
     @Test
     void add() {
+        when(questionRepository.getQuestionSet()).thenReturn(JAVA_TEST_QUESTION_SET);
         assertEquals(questionService.add(JAVA_TEST_QUESTION_1), JAVA_TEST_QUESTION_1);
         assertTrue(questionService.getAll().contains(JAVA_TEST_QUESTION_1));
         assertEquals(questionService.add(JAVA_TEST_QUESTION_2), JAVA_TEST_QUESTION_2);
@@ -26,7 +37,6 @@ class JavaQuestionServiceTest {
         assertTrue(questionService.getAll().contains(JAVA_TEST_QUESTION_4));
         assertEquals(questionService.add(JAVA_TEST_QUESTION_5), JAVA_TEST_QUESTION_5);
         assertTrue(questionService.getAll().contains(JAVA_TEST_QUESTION_5));
-        removeTestQuestions();
 
         assertEquals(questionService.add(JAVA_TEST_QUESTION_1.getQuestion(), JAVA_TEST_QUESTION_1.getAnswer()), JAVA_TEST_QUESTION_1);
         assertTrue(questionService.getAll().contains(JAVA_TEST_QUESTION_1));
@@ -38,12 +48,10 @@ class JavaQuestionServiceTest {
         assertTrue(questionService.getAll().contains(JAVA_TEST_QUESTION_4));
         assertEquals(questionService.add(JAVA_TEST_QUESTION_5.getQuestion(), JAVA_TEST_QUESTION_5.getAnswer()), JAVA_TEST_QUESTION_5);
         assertTrue(questionService.getAll().contains(JAVA_TEST_QUESTION_5));
-        removeTestQuestions();
     }
 
     @Test
     void remove() {
-        addTestQuestions();
         questionService.remove(JAVA_TEST_QUESTION_1);
         assertFalse(questionService.getAll().contains(JAVA_TEST_QUESTION_1));
         questionService.remove(JAVA_TEST_QUESTION_2);
@@ -58,15 +66,14 @@ class JavaQuestionServiceTest {
 
     @Test
     void getAll() {
-        addTestQuestions();
+        when(questionRepository.getQuestionSet()).thenReturn(JAVA_TEST_QUESTION_SET);
         Set<Question> testQuestionSet = new HashSet<>(Set.of(JAVA_TEST_QUESTION_1, JAVA_TEST_QUESTION_2, JAVA_TEST_QUESTION_3, JAVA_TEST_QUESTION_4, JAVA_TEST_QUESTION_5));
         assertEquals(questionService.getAll(), testQuestionSet);
-        removeTestQuestions();
     }
 
     @Test
     void getRandomQuestion() {
-        addTestQuestions();
+        when(questionRepository.getQuestionSet()).thenReturn(JAVA_TEST_QUESTION_SET);
         Question resultRandomQuestion = questionService.getRandomQuestion();
         assertTrue(
                 resultRandomQuestion.equals(JAVA_TEST_QUESTION_1) ||
@@ -74,21 +81,5 @@ class JavaQuestionServiceTest {
                         resultRandomQuestion.equals(JAVA_TEST_QUESTION_3) ||
                         resultRandomQuestion.equals(JAVA_TEST_QUESTION_4) ||
                         resultRandomQuestion.equals(JAVA_TEST_QUESTION_5));
-    }
-
-    private void addTestQuestions() {
-        questionService.add(JAVA_TEST_QUESTION_1);
-        questionService.add(JAVA_TEST_QUESTION_2);
-        questionService.add(JAVA_TEST_QUESTION_3);
-        questionService.add(JAVA_TEST_QUESTION_4);
-        questionService.add(JAVA_TEST_QUESTION_5);
-    }
-
-    private void removeTestQuestions() {
-        questionService.remove(JAVA_TEST_QUESTION_1);
-        questionService.remove(JAVA_TEST_QUESTION_2);
-        questionService.remove(JAVA_TEST_QUESTION_3);
-        questionService.remove(JAVA_TEST_QUESTION_4);
-        questionService.remove(JAVA_TEST_QUESTION_5);
     }
 }
