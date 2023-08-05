@@ -1,5 +1,6 @@
 package course_2.course_work_2.data;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Repository
+@Primary
 public class JavaQuestionRepositoryImpl implements QuestionRepository {
     Map<String, String> javaQuestionMap = new HashMap<>();
     Set<Question> javaQuestionSet = new HashSet<>();

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@Repository
+//@Repository
 public class MathQuestionRepositoryImpl implements QuestionRepository {
     Map<String, String> mathQuestionMap = new HashMap<>();
     Set<Question> mathQuestionSet = new HashSet<>();
