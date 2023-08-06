@@ -1,19 +1,15 @@
 package course_2.course_work_2.services;
 
 import course_2.course_work_2.data.Question;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static course_2.course_work_2.constants.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
