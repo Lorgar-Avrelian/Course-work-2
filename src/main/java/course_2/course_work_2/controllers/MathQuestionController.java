@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-public class JavaQuestionController {
+public class MathQuestionController {
     private final QuestionService questionService;
 
     @Autowired
-    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService) {
+    public MathQuestionController(@Qualifier("mathQuestionService") QuestionService questionService) {
         this.questionService = questionService;
     }
 
-    @GetMapping(path = "/java")
+    @GetMapping(path = "/math")
     public Collection<Question> getAll() {
         return questionService.getAll();
     }
 
-    @GetMapping(path = "/java/add")
+    @GetMapping(path = "/math/add")
     public Question add(@RequestParam String question, @RequestParam String answer) {
         return questionService.add(question, answer);
     }
 
-    @GetMapping(path = "/java/remove")
+    @GetMapping(path = "/math/remove")
     public Question remove(@RequestParam String question, @RequestParam String answer) {
         Question removableQuestion = new Question(question, answer);
         return questionService.remove(removableQuestion);

@@ -3,16 +3,20 @@ package course_2.course_work_2.services;
 import course_2.course_work_2.data.Question;
 import course_2.course_work_2.data.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class JavaQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
 
     @Autowired
-    public JavaQuestionService(QuestionRepository questionRepository) {
+    public JavaQuestionService(@Qualifier("javaQuestionRepositoryImpl") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
